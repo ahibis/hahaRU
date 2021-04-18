@@ -12,15 +12,35 @@ for details on configuring this project to bundle and minify static web assets. 
     box-shadow: 2px 2px 4px rgba(0,0,0,0.25);
 }
 
+.navbar2 {
+    background: white;
+    height: 422px;
+    width: 310px;
+    border-radius: 15px;
+    margin-top: 154px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.25);
+}
+
 #logo {
     height: 62px;
     width: 177px;
+    margin: 0 auto;
 }
 
 a.navbar-brand {
     white-space: normal;
     text-align: center;
     word-break: break-all;
+}
+
+a.navbar-brand2 {
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* Provide sufficient contrast against white background */
