@@ -1,5 +1,8 @@
+using hahaRU.Managers;
+using hahaRU.Storage;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -7,6 +10,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApplication1.Managers.Students;
+using WebApplication1.Storage;
 
 namespace hahaRU
 {
@@ -23,6 +28,11 @@ namespace hahaRU
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddSingleton<ExampleContext>();
+            services.AddTransient<IStudentManager, StudentManager>();
+            /*services.AddDbContext<Context>(options => 
+            options.UseSqlServer("Server=WIN-85MBVBQ7BO6;Database=haha;Trusted_Connection=True;"));*/
+            //services.AddTransient<IUserManager, UserManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
