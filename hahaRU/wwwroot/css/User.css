@@ -1,0 +1,37 @@
+﻿#info {
+    width: 868px;
+    padding:0px 58px;
+    padding-top:44px;
+}
+.ava {
+    width: 177px;
+    height: 177px;
+}
+.name {
+    font-size: 24px;
+    line-height: 18px;
+}
+.date {
+    font-size: 14px;
+    line-height: 18px;
+}
+.joke{
+    width: 752px;
+    height: 120px;
+    border: 1px solid #797979;
+    box-sizing: border-box;
+    border-radius: 15px;
+}
+.url img {
+    width: 54px;
+}
+.url div {
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: 0.2px;
+    color: rgba(55, 63, 65, 0.61);
+    padding-top:20px;
+}
+main{
+    margin-top:68px;
+}
