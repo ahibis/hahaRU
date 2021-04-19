@@ -32,17 +32,30 @@ h1, h2, h3, h4, h5, h6 {
     height: 100vh;
 }
 
+.intro_title {
+    position: absolute;
+    width: 26.94vw;
+    height: 4.37vw;
+    left: 36.5vw;
+    top: 9.1vw;
+
+    font-size: 1.67vw;
+    font-style: italic;
+    font-weight: lighter;
+    text-shadow: 0px 0.278vw 0.278vw rgba(0, 0, 0, 0.25);
+}
+
 .header {
     background: white;
     height: 5.834vw;
     border-radius: 1vw;
-    width:93vw;
-    box-shadow: 2px 2px 4px rgba(0,0,0,0.25);
-    padding-left:5.76vw;
-    padding-right:5.34vw;
-    padding-top:1vw;
-    margin-left:3.5vw;
-    margin-top:10px;
+    width: 93vw;
+    box-shadow: 0.139vw 0.139vw 0.278vw rgba(0,0,0,0.25);
+    padding-left: 5.76vw;
+    padding-right: 5.34vw;
+    padding-top: 1vw;
+    margin-left: 3.5vw;
+    margin-top: 10px;
 }
 
 .header_inner {
@@ -55,17 +68,22 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 1vw;
     display: flex;
     justify-content: space-between;
-    width:38.6vw;
+    width: 38.6vw;
 }
+
+.nav_user {
+    display: flex;
+    font-size: 1vw;
+    justify-content: space-between;
+}
+
 a{
     text-decoration:none;
 }
+
 .logo {
     width:12.3vw;
 }
-
-
-
 
 .nav_link {
     display: inline-block;
