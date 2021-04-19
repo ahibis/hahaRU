@@ -52,6 +52,14 @@
     padding-top: 21vw;
 }
 
+#box {
+    background: white;
+    height: 177px;
+    border-radius: 15px;
+    width: 1080px;
+    margin-top: -10px;
+}
+
 #button {
     font-family: Montserrat;
     font-style: italic;
@@ -87,6 +95,18 @@ h1, h2, h3, h4, h5, h6 {
 
 }
 
+.intro_title {
+    position: absolute;
+    width: 26.94vw;
+    height: 4.37vw;
+    left: 36.5vw;
+    top: 9.1vw;
+    font-size: 1.67vw;
+    font-style: italic;
+    font-weight: lighter;
+    text-shadow: 0px 0.278vw 0.278vw rgba(0, 0, 0, 0.25);
+}
+
 .header {
     background: white;
     height: 5.834vw;
@@ -112,15 +132,14 @@ h1, h2, h3, h4, h5, h6 {
     justify-content: space-between;
     width:38.6vw;
 }
+
 a{
     text-decoration:none;
 }
+
 .logo {
     width:12.3vw;
 }
-
-
-
 
 .nav_link {
     display: inline-block;
@@ -134,8 +153,6 @@ a{
     text-decoration:none;
 }
 
-
-
 .navbar {
     /*background: white;
     height: 84px;
@@ -147,8 +164,6 @@ a{
     box-shadow: 2px 2px 4px rgba(0,0,0,0.25);
     line-height: 84px;*/
 }
-
-
 
 a.navbar-brand {
     /*white-space: normal;
