@@ -54,7 +54,7 @@ namespace Login
                     return false;
             return true;
         }
-        static void Main(string[] args)
+        public void Login()
         {
             Console.Write("Enter password: ");
             string password = Console.ReadLine();
