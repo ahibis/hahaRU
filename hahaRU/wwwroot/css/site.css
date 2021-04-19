@@ -39,6 +39,19 @@
     padding-top: 21vw;
 }
 
+#anecdote {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: 0.2px;
+    color: #373F41;
+    text-align: center;
+    align-items: center;
+    padding-top: 21vw;
+}
+
 #button {
     font-family: Montserrat;
     font-style: italic;
