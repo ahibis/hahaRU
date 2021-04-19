@@ -30,9 +30,9 @@ namespace hahaRU
             services.AddControllersWithViews();
             services.AddSingleton<ExampleContext>();
             services.AddTransient<IStudentManager, StudentManager>();
-            /*services.AddDbContext<Context>(options => 
-            options.UseSqlServer("Server=WIN-85MBVBQ7BO6;Database=haha;Trusted_Connection=True;"));*/
-            //services.AddTransient<IUserManager, UserManager>();
+            services.AddDbContext<Context>(options => 
+            options.UseSqlServer("Server=WIN-85MBVBQ7BO6;Database=haha;Trusted_Connection=True;"));
+            services.AddTransient<IUserManager, UserManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

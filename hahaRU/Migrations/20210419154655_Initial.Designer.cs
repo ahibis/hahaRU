@@ -9,8 +9,8 @@ using hahaRU.Storage;
 namespace hahaRU.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20210418190115_initMigration")]
-    partial class initMigration
+    [Migration("20210419154655_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -34,6 +34,7 @@ namespace hahaRU.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Text")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
