@@ -13,7 +13,7 @@ namespace hahaRU.Controllers
 
         public UserController(IUserManager manager)
         {
-            _manager = manager;
+            _manager = manager;//manager
         }
 
         public IActionResult Index()
