@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace hahaRU.Controllers
 {
-    public class LoginController : Controller
+    public class RegistrationController : Controller
     {
         public IActionResult Index()
         {

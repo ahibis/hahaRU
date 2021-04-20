@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using hahaRU.Managers;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,13 @@ namespace hahaRU.Controllers
 {
     public class UserController : Controller
     {
+        private IUserManager _manager;
+
+        public UserController(IUserManager manager)
+        {
+            _manager = manager;//manager
+        }
+
         public IActionResult Index()
         {
             return View();

@@ -81,7 +81,15 @@
 h1, h2, h3, h4, h5, h6 {
     margin: 0;
 }
+.between {
+    display: flex;
+    justify-content: left;
+}
 
+.left {
+    display: flex;
+    justify-content: right;
+}
 .container {
     width: 100%;
     max-width: 1080px;
@@ -146,6 +154,9 @@ a{
 .logo {
     width:12.3vw;
 }
+
+
+
 
 .nav_link {
     display: inline-block;
