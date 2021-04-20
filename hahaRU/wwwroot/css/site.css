@@ -1,71 +1,183 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
+﻿body {
+    margin: 0;
+    background: linear-gradient(#ffe66b, #FFC15F)fixed;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    line-height: 18px;
+    color: #373F41;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing:border-box;
+    margin:0px;
+    padding:0px;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+}
+
+#gen {
+    margin-top: 24px;
+    text-align: center;
+}
+
+#funnyword {
+    font-family: Montserrat;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 72px;
+    line-height: 18px;
+    letter-spacing: 0.2px;
+    color: #373F41;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    text-align: center;
+    align-items:center;
+    padding-top: 21vw;
+}
+
+#anecdote {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: 0.2px;
+    color: #373F41;
+    text-align: center;
+    align-items: center;
+    padding-top: 21vw;
+}
+
+#box {
+    background: white;
+    height: 177px;
+    border-radius: 15px;
+    width: 1080px;
+    margin-top: -10px;
+}
+
+#button {
+    font-family: Montserrat;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 24px;
+    line-height: 18px;
+    letter-spacing: 0.2px;
+    color: #373F41;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    background: white;
+    height: 70px;
+    border-radius: 15px;
+    width: 404px;
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.25);
+    margin-left: 0px;
+    margin-top: -180px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+}
+.between {
+    display: flex;
+    justify-content: left;
+}
+
+.left {
+    display: flex;
+    justify-content: right;
+}
+.container {
+    width: 100%;
+    max-width: 1080px;
+    margin: 0 auto;
+
+}
+
+.intro {
+    width: 100%;
+    height: 100vh;
+
+}
+
+.intro_title {
+    position: absolute;
+    width: 26.94vw;
+    height: 4.37vw;
+    left: 36.5vw;
+    top: 9.1vw;
+    font-size: 1.67vw;
+    font-style: italic;
+    font-weight: lighter;
+    text-shadow: 0px 0.278vw 0.278vw rgba(0, 0, 0, 0.25);
+}
+
+.header {
+    background: white;
+    height: 5.834vw;
+    border-radius: 1vw;
+    width:93vw;
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.25);
+    padding-left:5.76vw;
+    padding-right:5.34vw;
+    padding-top:1vw;
+    margin-left:3.5vw;
+    margin-top:10px;
+}
+
+.header_inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav {
+    font-size: 1vw;
+    display: flex;
+    justify-content: space-between;
+    width:38.6vw;
+}
+
+a{
+    text-decoration:none;
+}
+
+.logo {
+    width:12.3vw;
+}
+
+
+
+
+.nav_link {
+    display: inline-block;
+    color: #373F41;
+    text-decoration: none;
+    transition: color .3s linear;
+}
+
+.nav_link:hover {
+    color: #EC6F3C;
+    text-decoration:none;
+}
+
+.navbar {
+    /*background: white;
+    height: 84px;
+    width: auto;
+    border-radius: 15px;
+    margin-top: 35px;
+    margin-left: 48px;
+    margin-right: 48px;
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.25);
+    line-height: 84px;*/
+}
 
 a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
-}
-
-/* Provide sufficient contrast against white background */
-a {
-  color: #0366d6;
-}
-
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
-}
-
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
-}
-
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  font-size: 14px;
-}
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.border-top {
-  border-top: 1px solid #e5e5e5;
-}
-.border-bottom {
-  border-bottom: 1px solid #e5e5e5;
-}
-
-.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
-}
-
-button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
-}
-
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  position: relative;
-  min-height: 100%;
-}
-
-body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
-}
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+    /*white-space: normal;
+    text-align: center;
+    word-break: break-all;*/
 }
