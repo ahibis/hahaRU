@@ -15,11 +15,13 @@ namespace hahaRU.Controllers
 
         public IActionResult Jokes()
         {
+            anecdotGen a = new anecdotGen();
+            ViewBag.word = a.word;
             return View();
         }
         public IActionResult Word()
         {
-            AHAHAHAH a = new AHAHAHAH();
+            wordGen a = new wordGen();
             ViewBag.word = a.word;
             return View();
         }
