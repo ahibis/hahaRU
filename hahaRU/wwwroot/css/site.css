@@ -14,26 +14,82 @@
     margin:0px;
     padding:0px;
 }
-.center{
-    display:flex;
-    justify-content:center;
+
+.center {
+    display: flex;
+    justify-content: center;
+}
+
+#gen {
+    margin-top: 24px;
+    text-align: center;
+}
+
+#funnyword {
+    font-family: Montserrat;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 72px;
+    line-height: 18px;
+    letter-spacing: 0.2px;
+    color: #373F41;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    text-align: center;
+    align-items:center;
+    padding-top: 21vw;
+}
+
+#anecdote {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: 0.2px;
+    color: #373F41;
+    text-align: center;
+    align-items: center;
+    padding-top: 21vw;
+}
+
+#box {
+    background: white;
+    height: 177px;
+    border-radius: 15px;
+    width: 1080px;
+    margin-top: -10px;
+}
+
+#button {
+    font-family: Montserrat;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 24px;
+    line-height: 18px;
+    letter-spacing: 0.2px;
+    color: #373F41;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    background: white;
+    height: 70px;
+    border-radius: 15px;
+    width: 404px;
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.25);
+    margin-left: 0px;
+    margin-top: -180px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
 }
 .between {
     display: flex;
     justify-content: left;
 }
+
 .left {
     display: flex;
     justify-content: right;
 }
-.right {
-    display: flex;
-    justify-content: right;
-}
-h1, h2, h3, h4, h5, h6 {
-    margin: 0;
-}
-
 .container {
     width: 100%;
     max-width: 1080px;
@@ -44,6 +100,19 @@ h1, h2, h3, h4, h5, h6 {
 .intro {
     width: 100%;
     height: 100vh;
+
+}
+
+.intro_title {
+    position: absolute;
+    width: 26.94vw;
+    height: 4.37vw;
+    left: 36.5vw;
+    top: 9.1vw;
+    font-size: 1.67vw;
+    font-style: italic;
+    font-weight: lighter;
+    text-shadow: 0px 0.278vw 0.278vw rgba(0, 0, 0, 0.25);
 }
 
 .header {
@@ -71,18 +140,16 @@ h1, h2, h3, h4, h5, h6 {
     justify-content: space-between;
     width:38.6vw;
 }
+
 a{
     text-decoration:none;
 }
+
 .logo {
     width:12.3vw;
 }
 
-.wrap {
-    background: #FFFFFF;
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 15px;
-}
+
 
 
 .nav_link {
@@ -97,8 +164,6 @@ a{
     text-decoration:none;
 }
 
-
-
 .navbar {
     /*background: white;
     height: 84px;
@@ -110,8 +175,6 @@ a{
     box-shadow: 2px 2px 4px rgba(0,0,0,0.25);
     line-height: 84px;*/
 }
-
-
 
 a.navbar-brand {
     /*white-space: normal;
