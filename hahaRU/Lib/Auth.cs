@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Security.Cryptography;
+using System.Threading.Tasks;
 
-namespace Login
+namespace hahaRU.Lib
 {
-    class Program
+    public class Auth
     {
         public static string HashPassword(string password)
         {

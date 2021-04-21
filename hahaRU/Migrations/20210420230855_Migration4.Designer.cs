@@ -9,8 +9,8 @@ using hahaRU.Storage;
 namespace hahaRU.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20210419154655_Initial")]
-    partial class Initial
+    [Migration("20210420230855_Migration4")]
+    partial class Migration4
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -30,8 +30,14 @@ namespace hahaRU.Migrations
                     b.Property<string>("Dislikes")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("DislikesCount")
+                        .HasColumnType("int");
+
                     b.Property<string>("Likes")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("LikesCount")
+                        .HasColumnType("int");
 
                     b.Property<string>("Text")
                         .IsRequired()
@@ -52,17 +58,24 @@ namespace hahaRU.Migrations
                     b.Property<string>("AvatarSrc")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Date")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("FavoriteJoke")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("InstaLink")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Name")
-                        .HasColumnType("int");
+                    b.Property<string>("Login")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("SecondName")
-                        .HasColumnType("int");
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Status")
                         .HasColumnType("nvarchar(max)");
@@ -76,6 +89,18 @@ namespace hahaRU.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("hahaRU.Storage.Entity.srcImage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Images");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,22 +1,49 @@
 ﻿<link href="/css/User.css" rel="stylesheet" />   
-<div class="between">	
-	<img src="/img/logo.png" class="ava" >
-	<div class="wrap" id="info" >
-		<div class="name">Ник</div>
-		<div class="date">24.01.2020</div>
-		<div class="status">Статус</div>
-		<div class="joke">любимый анекдот</div>
-		<a href="" class="left url">
-			<img src="/img/VK.png">
-			<div>vk</div>
-		</a>
-		<a href="" class="left  url">
-			<img src="/img/insta.png">
-			<div>ok</div>
-		</a>
-		<a href="" class="left  url">
-			<img src="/img/OK.png">
-			<div>instagram</div>
-		</a>
-	</div>
-</div>				                                                                          
+<script>
+    ID=@ViewBag.id;
+</script>
+<div id="app">
+    <div class="between Data">
+        <img :src="AvatarSrc" class="ava">
+        <div class="wrap" id="info">
+            <div class="name">{{Login}}</div>
+            <input class="date" type="date" v-model="Date" name="Date">
+            <input class="status" v-model="Status" name="Status">
+            <textarea class="joke" v-model="FavoriteJoke" name="FavoriteJoke">любимый анекдот</textarea>
+            <div v-if="edit">
+                <div class="left url">
+                    <img src="/img/VK.png">
+                    <input v-model="VkLink" name="VkLink">
+                </div>
+                <div class="left  url">
+                    <img src="/img/insta.png">
+                    <input v-model="InstaLink" name="InstaLink">
+                </div>
+                <div class="left  url">
+                    <img src="/img/OK.png">
+                    <input v-model="OK" name="OK">
+                </div>
+            </div>
+            <div v-else>
+                <a :href="VkLink" class="left url">
+                    <img src="/img/VK.png">
+                    <input v-model="VkLink" name="VkLink">
+                </a>
+                <a :href="InstaLink" class="left  url">
+                    <img src="/img/insta.png">
+                    <input v-model="InstaLink" name="InstaLink">
+                </a>
+                <a :href="OK" class="left  url">
+                    <img src="/img/OK.png">
+                    <input v-model="OK" name="OK">
+                </a>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+	
+<script src="~/js/User.js"></script>
+	
+	                                                                          

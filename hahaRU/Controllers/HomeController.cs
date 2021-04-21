@@ -1,4 +1,5 @@
-﻿using hahaRU.Models;
+﻿using hahaRU.Managers;
+using hahaRU.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -22,12 +23,6 @@ namespace hahaRU.Controllers
         {
             return View();
         }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

@@ -3,12 +3,13 @@
 }
 
 <link href="/css/Auth.css" rel="stylesheet" />
-<div class="authForm">
+<div class="authForm" id="auth">
     <div class="center"><img src="/FinalLogo.png"></div>
     <input name="Name" placeholder="Введите имя пользователя" />
     <input name="email" placeholder="Введите email" />
     <input name="Password" type="password" placeholder="Введите пароль" />
     <input name="Password2" type="password" placeholder="Повторите паороль" />
-    <input type="submit" name="Login" value="Зарегестрироваться" />
-    <input type="button" value="есть аккаунт" />
+    <input type="submit" name="Login" value="Зарегестрироваться" onclick="registration()">
+    <input type="button" value="есть аккаунт" onclick="location.href='/Auth'">
+    <div id="message"></div>
 </div>                                                                                               
