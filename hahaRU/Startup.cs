@@ -31,8 +31,8 @@ namespace hahaRU
             services.AddControllersWithViews();
             services.AddSingleton<ExampleContext>();
             services.AddTransient<IStudentManager, StudentManager>();
-            services.AddDbContext<Context>(options => 
-            options.UseSqlServer("Server=KACHPC;Database=haha;Trusted_Connection=True;"));
+            services.AddDbContext<Context>(options =>
+            options.UseSqlServer("Server=KachPC;Database=haha;Trusted_Connection=True; "));
             services.AddTransient<IUserManager, UserManager>();
             services.AddTransient<IAuthManager, AuthManager>();
             services.AddDistributedMemoryCache();
