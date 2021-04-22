@@ -34,6 +34,12 @@ body::-webkit-scrollbar-thumb {
     justify-content: center;
 }
 
+.center2 {
+    display: flex;
+    justify-content: center;
+    margin-top: 300px;
+}
+
 #gen {
     margin-top: 24px;
     text-align: center;

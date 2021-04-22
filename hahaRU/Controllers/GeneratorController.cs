@@ -25,5 +25,11 @@ namespace hahaRU.Controllers
             ViewBag.word = a.word;
             return View();
         }
+        public IActionResult YT()
+        {
+            rngYouTube a = new rngYouTube();
+            ViewBag.word = a.url;
+            return View();
+        }
     }
 }
