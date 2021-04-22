@@ -25,23 +25,31 @@ namespace hahaRU
         }
         public string GetURL()
         {
-            var count = 1;
-            var API_KEY = "AIzaSyBVJ5iH6EhlQ7g_3XQlO4US_ytkbam1kOU";
-            var q = RandomString(3);
-            var url = "https://www.googleapis.com/youtube/v3/search?key=" + API_KEY + "&maxResults=" + count + "&part=snippet&type=video&q=" + q;
-
-            using (WebClient wc = new WebClient())
+            try
             {
-                var json = wc.DownloadString(url);
-                dynamic jsonObject = JsonConvert.DeserializeObject(json);
-                foreach (var line in jsonObject["items"])
+                var count = 1; //50 max
+                var API_KEY = "AIzaSyBVJ5iH6EhlQ7g_3XQlO4US_ytkbam1kOU";
+                var q = RandomString(4);
+               // var url = "https://www.googleapis.com/youtube/v3/search?key=" + API_KEY + "&maxResults=" + count + "&part=snippet&type=video&q=" + q;
+
+                using (WebClient wc = new WebClient())
                 {
-                    return line["id"]["videoId"];
-                    //Console.WriteLine(line["id"]["videoId"]);
-                    /*store your id*/
+                    var json = wc.DownloadString(url);
+                    dynamic jsonObject = JsonConvert.DeserializeObject(json);
+                    foreach (var line in jsonObject["items"])
+                    {
+                        return line["id"]["videoId"];
+                        //Console.WriteLine(line["id"]["videoId"]);
+                        /*store your id*/
+                    }
+                    q = "LP5k6pO37kw";
+                    return q;
                 }
+            }
+            catch
+            {
+                var q = "LP5k6pO37kw";
                 return q;
-                //Console.Read();
             }
         }
     }
