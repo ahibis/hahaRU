@@ -3,7 +3,7 @@
     padding:0px 58px;
     padding-top:44px;
 }
-.ava {
+.avaMain {
     width: 177px;
     height: 177px;
 }
@@ -38,7 +38,14 @@ main{
 input {
     border: none;
     background: none;
-    display:block;
+    display: block;
+    font-family: 'Montserrat', sans-serif
+}
+input:hover{
+    border:none
+}
+textarea::hover{
+    border:none;
 }
 textarea {
     display: block;
@@ -46,4 +53,30 @@ textarea {
     background: none;
     border: none;
     resize: none;
+    font-family: 'Montserrat', sans-serif
 }
+.inputPost {
+    width: 1057px;
+    min-height: 157px;
+    border: 1px solid #797979;
+    box-sizing: border-box;
+    border-radius: 15px;
+    padding:6px;
+}
+.camera {
+    width: 25px;
+    height: 25px;
+}
+.postSend {
+    width: 92px;
+    height: 25px;
+    background: #959595;
+    border-radius: 15px;
+    border:none;
+    margin-left:15px;
+}
+.inpWrap {
+    padding: 10px;
+    margin-top: 45px;
+}
+

@@ -1,10 +1,11 @@
-﻿<link href="/css/User.css" rel="stylesheet" />   
+﻿<link href="/css/Home.css" rel="stylesheet" />
+<link href="/css/User.css" rel="stylesheet" />
 <script>
     ID=@ViewBag.id;
 </script>
 <div id="app">
     <div class="between Data">
-        <img :src="AvatarSrc" class="ava">
+        <img :src="AvatarSrc" class="avaMain">
         <div class="wrap" id="info">
             <div class="name">{{Login}}</div>
             <input class="date" type="date" v-model="Date" name="Date">
@@ -38,12 +39,37 @@
                     <input v-model="OK" name="OK">
                 </a>
             </div>
-            
+
+        </div>
+    </div>
+    <div class="wrap inpWrap">
+        <textarea class="inputPost" placeholder="Введите текст" v-model="text"></textarea>
+        <div class="between">
+            <div></div>
+            <div class="between">
+                <img src="/img/camera.png" class="camera" v-on:click="getImg">
+                <button class="postSend" v-on:click="sendPost" >отправить</button>
+            </div>
+        </div>
+    </div>
+    <div class="block between" v-for="post in Posts">
+        <div>
+            <a href="/User">
+                <img :src="AvatarSrc" class="ava">
+            </a>
+        </div>
+        <div class="inner" >
+            <div class="name">{{Login}}</div>
+            <div class="date">{{post.date.replaceAll("-",".")}}</div>
+            <div class="anekdot">{{post.text}}</div>
+            <div>
+                <div class="like">{{post.likesCount}}<img src="/img/Like 1.png" class="like1"></div>
+                <div class="dislike">{{post.dislikesCount}}<img src="/img/Like 2.png" class="dislike1"></div>
+            </div>
         </div>
     </div>
 </div>
 
-	
+
 <script src="~/js/User.js"></script>
-	
-	                                                                          
+

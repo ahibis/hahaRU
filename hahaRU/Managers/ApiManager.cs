@@ -1,6 +1,8 @@
-﻿using hahaRU.Storage;
+﻿using hahaRU.Models;
+using hahaRU.Storage;
 using hahaRU.Storage.Entity;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,17 +11,26 @@ using System.Threading.Tasks;
 
 namespace hahaRU.Managers
 {
-    public class UserManager: IUserManager
+    public class ApiManager: IApiManager
     {
         private Context _context;
 
-        public UserManager(Context context)
+        public ApiManager(Context context)
         {
             _context = context;
 
         }
 
-
+        public object getPosts(getPostReq data)
+        {
+            int count= data.Count ?? 20;
+            int offset = data.Offset ?? 0;
+            if (data.UserId == null)
+            {
+                return _context.Posts.OrderByDescending(x => x.Likes).Skip(offset).Take(count).ToList();
+            }
+            return _context.Posts.Where(e => e.UserId == data.UserId).OrderByDescending(x => x.Id).Skip(offset).Take(count).ToList();
+        }
 
         public string getUser(int id)
         {
@@ -37,6 +48,23 @@ namespace hahaRU.Managers
             if (users.Count == 0) return "{}";
             users[0].Password = null;
             return JsonSerializer.Serialize(users[0]);
+        }
+
+        public object sendPost(Post post, HttpContext httpContext)
+        {
+            int? id = httpContext.Session.GetInt32("id");
+            if (id == null) return new JsonStatus() { status = "error", text = "Вы не авторизовались" };
+            if (post.Text == "") return new JsonStatus() { status = "error", text = "Пост не может быть без текста" };
+            if (post.Text == null) return new JsonStatus() { status = "error", text = "текст не найден" };
+            Post post1 = new Post()
+            {
+                Text = post.Text,
+                UserId = (int)id,
+                Date = post.Date
+            };
+            _context.Posts.Add(post1);
+            _context.SaveChanges();
+            return new JsonStatus() { status="ok",text="ok"};
         }
 
         public string updateUser(User user, HttpContext httpContext)

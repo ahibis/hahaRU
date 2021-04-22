@@ -9,9 +9,9 @@ namespace hahaRU.Controllers
 {
     public class UserController : Controller
     {
-        private IUserManager _manager;
+        private IApiManager _manager;
 
-        public UserController(IUserManager manager)
+        public UserController(IApiManager manager)
         {
             _manager = manager;//manager
         }

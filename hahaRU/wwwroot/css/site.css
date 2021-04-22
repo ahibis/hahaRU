@@ -98,7 +98,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .between {
     display: flex;
-    justify-content: left;
+    justify-content: space-between;
 }
 
 .left {
@@ -152,8 +152,11 @@ a{
 .logo {
     width:12.3vw;
 }
-
-
+.wrap {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+}
 
 
 .nav_link {
@@ -168,20 +171,3 @@ a{
     text-decoration:none;
 }
 
-.navbar {
-    /*background: white;
-    height: 84px;
-    width: auto;
-    border-radius: 15px;
-    margin-top: 35px;
-    margin-left: 48px;
-    margin-right: 48px;
-    box-shadow: 2px 2px 4px rgba(0,0,0,0.25);
-    line-height: 84px;*/
-}
-
-a.navbar-brand {
-    /*white-space: normal;
-    text-align: center;
-    word-break: break-all;*/
-}
