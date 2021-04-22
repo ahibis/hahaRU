@@ -16,6 +16,7 @@ namespace hahaRU.Storage.Entity
         public string Text { get; set; }
         public string Likes { get; set; }
         public string Dislikes { get; set; }
-
+        public int LikesCount { get; set; }
+        public int DislikesCount{ get; set; }
     }
 }

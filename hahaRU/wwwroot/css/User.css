@@ -35,3 +35,15 @@
 main{
     margin-top:68px;
 }
+input {
+    border: none;
+    background: none;
+    display:block;
+}
+textarea {
+    display: block;
+    text-decoration: none;
+    background: none;
+    border: none;
+    resize: none;
+}

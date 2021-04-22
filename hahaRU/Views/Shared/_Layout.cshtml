@@ -3,6 +3,9 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="/js/vue.min.js"></script>
     <title> Ahaha & hehehe</title>
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -18,7 +21,11 @@
                 <a class="nav_link" href="/Generator/Jokes" title="Генерация анекдотов на основе GPT-2 OpenAI">Генератор анекдотов</a>
             </nav>
             <div class="nav_user">
-                <a class="nav_link" href="/User" title="Настройки профиля">Имя пользователя</a>
+                <a class="nav_link" href="/User" id="userLink" title="Настройки профиля">
+                    <span id="userName"></span>
+                    <img id="userImg" style=" width: 2vw;height:2vw;border-radius: 50%" src="">
+                </a>
+
             </div>
         </div>
     </header>
@@ -32,6 +39,8 @@
     </div>
     
 
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

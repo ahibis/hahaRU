@@ -15,9 +15,15 @@ namespace hahaRU.Controllers
         {
             _manager = manager;//manager
         }
-
+        [Route("User/{id:int}")]
+        public IActionResult Index(int id)
+        {
+            ViewBag.id = id;
+            return View();
+        }
         public IActionResult Index()
         {
+            ViewBag.id = 0;
             return View();
         }
     }

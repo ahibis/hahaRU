@@ -13,12 +13,11 @@ namespace hahaRU.Storage.Entity
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [Required]
-        public int Name { get; set; }
-        [Required]
-        public int SecondName { get; set; }
-
+        public string Login { get; set; }
+        public string Password { get; set; }
         public string AvatarSrc { get; set; }
-
+        public string Date { get; set; }
+        public string Email { get; set; }
         public string Status { get; set; }
         public string FavoriteJoke { get; set; }
         public string VkLink { get; set; }

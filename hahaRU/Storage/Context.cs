@@ -15,5 +15,6 @@ namespace hahaRU.Storage
 
         public DbSet<User> Users { get; set; }
         public DbSet<Post> Posts { get; set; }
+        public DbSet<srcImage> Images { get; set; }
     }
 }
