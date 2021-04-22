@@ -1,13 +1,16 @@
-﻿<body>
-    <div id="anecdote">
-        <p>@ViewBag.word</p>
+﻿<link href="/css/Home.css" rel="stylesheet" />
+<link href="/css/Jokes.css" rel="stylesheet" />
+
+<div class="buttons">
+    <div id="button" , button onClick="window.location.reload();">
+        <p id="gen">Сгенерировать</p>
     </div>
-    <div class="center">
-        <div id="button" , button onClick="window.location.reload();">
-            <p id="gen">Сгенерировать</p>
+</div>
+<div class="block between">
+    <div class="inner">
+        <div class="anekdot1">@ViewBag.word</div>
+        <div>
+            <div class="published"><img src="/img/Like 1.png" ></div>
         </div>
     </div>
-</body>
-<div class="center">
-    <!==div id="box"></!==div>
-</div>                                           
+</div>

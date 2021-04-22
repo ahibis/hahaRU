@@ -27,8 +27,8 @@ namespace hahaRU.Controllers
         }
         public IActionResult YT()
         {
-            rngYouTube a = new rngYouTube();
-            ViewBag.word = a.url;
+            //rngYouTube a = new rngYouTube();
+            //ViewBag.word = a.url;
             return View();
         }
     }
