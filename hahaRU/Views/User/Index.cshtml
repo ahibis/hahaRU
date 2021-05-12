@@ -62,9 +62,9 @@
             <div class="name">{{Login}}</div>
             <div class="date">{{post.date.replaceAll("-",".")}}</div>
             <div class="anekdot">{{post.text}}</div>
-            <div>
-                <div class="like">{{post.likesCount}}<img src="/img/Like 1.png" class="like1"></div>
-                <div class="dislike">{{post.dislikesCount}}<img src="/img/Like 2.png" class="dislike1"></div>
+            <div class="between">
+                <div class="like" v-on:click="changeLike(post.id)" :id="post.id">{{post.likesCount}}<img src="/img/Like 1.png" class="like1"></div>
+                <div class="dislike" v-on:click="changeDisLike(post.id)" :id="post.id">{{post.dislikesCount}}<img src="/img/Like 2.png" class="dislike1"></div>
             </div>
         </div>
     </div>

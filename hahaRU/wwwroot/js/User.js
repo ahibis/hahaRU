@@ -25,6 +25,25 @@
             console.log(posts);
             vm.Posts = [...posts, ...vm.Posts];
         },
+        changeLike: async function (postId) {
+            console.log(postId)
+            let data = await api("changeLiked", { postId: postId });
+            console.log(data)
+            if (data.value) {
+                let post = this.Posts.filter(post => post.id == postId)[0]
+                post.isLiked = data.value.isliked;
+                post.likesCount = data.value.likesCount
+            }
+        },
+        changeDisLike: async function (postId) {
+            let data = await api("changeDisLiked", { postId: postId });
+            console.log(data)
+            if (data.value) {
+                let post = this.Posts.filter(post => post.id == postId)[0]
+                post.isDisliked = data.value.isDisliked;
+                post.dislikesCount = data.value.dislikesCount
+            }
+        },
         getImg(){
 
         }
