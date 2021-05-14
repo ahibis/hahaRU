@@ -30,7 +30,7 @@ namespace hahaRU
                 var count = 1; //50 max
                 var API_KEY = "AIzaSyBVJ5iH6EhlQ7g_3XQlO4US_ytkbam1kOU";
                 var q = RandomString(4);
-               // var url = "https://www.googleapis.com/youtube/v3/search?key=" + API_KEY + "&maxResults=" + count + "&part=snippet&type=video&q=" + q;
+                var url = "https://www.googleapis.com/youtube/v3/search?key=" + API_KEY + "&maxResults=" + count + "&part=snippet&type=video&q=" + q;
 
                 using (WebClient wc = new WebClient())
                 {

@@ -35,6 +35,9 @@ namespace hahaRU
             options.UseSqlServer("Server=KachPC;Database=haha;Trusted_Connection=True; "));
             services.AddTransient<IUserManager, UserManager>();
             services.AddTransient<IAuthManager, AuthManager>();
+
+            services.AddTransient<IURLsManager, URLsManager>();
+
             services.AddDistributedMemoryCache();
             services.AddSession(options =>
             {
