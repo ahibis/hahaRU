@@ -35,7 +35,7 @@ namespace hahaRU.Controllers
         public IActionResult YT()
         {
             rngYouTube a = new rngYouTube();
-            ViewBag.word = _manager.url;
+            ViewBag.word = _manager.GetURL();
             return View();
         }
     }
