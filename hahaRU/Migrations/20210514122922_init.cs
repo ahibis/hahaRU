@@ -2,12 +2,12 @@
 
 namespace hahaRU.Migrations
 {
-    public partial class initial : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "AnecdotEnd",
+                name: "AnecdotEnds",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -16,7 +16,7 @@ namespace hahaRU.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AnecdotEnd", x => x.Id);
+                    table.PrimaryKey("PK_AnecdotEnds", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -25,9 +25,11 @@ namespace hahaRU.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Text = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Date = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Likes = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Text = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    VideoSrc = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ImgSrc = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Likes = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Dislikes = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LikesCount = table.Column<int>(type: "int", nullable: false),
                     DislikesCount = table.Column<int>(type: "int", nullable: false)
@@ -38,14 +40,29 @@ namespace hahaRU.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "AnecdotTexts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Text = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AnecdotTexts", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "FunnyWords",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Text = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Date = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Likes = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Text = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    VideoSrc = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ImgSrc = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Likes = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Dislikes = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LikesCount = table.Column<int>(type: "int", nullable: false),
                     DislikesCount = table.Column<int>(type: "int", nullable: false)
@@ -69,13 +86,15 @@ namespace hahaRU.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "mems",
+                name: "Mems",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Date = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Img = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Text = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    VideoSrc = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ImgSrc = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Likes = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Dislikes = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LikesCount = table.Column<int>(type: "int", nullable: false),
@@ -83,7 +102,7 @@ namespace hahaRU.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_mems", x => x.Id);
+                    table.PrimaryKey("PK_Mems", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -161,9 +180,10 @@ namespace hahaRU.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Text = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Date = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Src = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Text = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    VideoSrc = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ImgSrc = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Likes = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Dislikes = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LikesCount = table.Column<int>(type: "int", nullable: false),
@@ -191,10 +211,13 @@ namespace hahaRU.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "AnecdotEnd");
+                name: "AnecdotEnds");
 
             migrationBuilder.DropTable(
                 name: "Anecdots");
+
+            migrationBuilder.DropTable(
+                name: "AnecdotTexts");
 
             migrationBuilder.DropTable(
                 name: "FunnyWords");
@@ -203,7 +226,7 @@ namespace hahaRU.Migrations
                 name: "memPictures");
 
             migrationBuilder.DropTable(
-                name: "mems");
+                name: "Mems");
 
             migrationBuilder.DropTable(
                 name: "memTexts");

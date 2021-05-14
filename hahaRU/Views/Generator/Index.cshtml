@@ -7,14 +7,17 @@
 	    	</select>
 	    	<h3>Тексты</h3>
 	    	<div v-for="text,i in texts">
-	    		<h4>Текст {{i}}</h4>
-	    		текст:<input v-model="text.text" placeholder="введите текст">
-	    		размер:<input v-model="text.size" type="number">
+	    		<h4>Текст {{i+1}}</h4>
+	    		<div>
+	    			текст:<input v-model="text.text" placeholder="введите текст">
+	    			размер:<input v-model="text.size" type="number">
+	    		</div>
+	    		
 	    		<span>генерировать текст</span>
 	    	</div>
 	    	<h3>Картинки</h3>
-	    	<div v-for="text,i in texts">
-	    		<h4>Картинка {{i}}</h4>
+	    	<div v-for="text,i in imgs">
+	    		<h4>Картинка {{i+1}}</h4>
 	    		<span>сгенерировать картинку</span>
 	    		<span>загрузить картинку</span>
 	    	</div>
