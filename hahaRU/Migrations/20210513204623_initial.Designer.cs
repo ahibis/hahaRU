@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using hahaRU.Storage;
 
 namespace hahaRU.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20210513204623_initial")]
+    partial class initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,19 +36,15 @@ namespace hahaRU.Migrations
                     b.Property<int>("DislikesCount")
                         .HasColumnType("int");
 
-                    b.Property<string>("ImgSrc")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Likes")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("LikesCount")
                         .HasColumnType("int");
 
                     b.Property<string>("Text")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("VideoSrc")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -67,23 +65,7 @@ namespace hahaRU.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AnecdotEnds");
-                });
-
-            modelBuilder.Entity("hahaRU.Storage.Entity.AnecdotTexts", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Text")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AnecdotTexts");
+                    b.ToTable("AnecdotEnd");
                 });
 
             modelBuilder.Entity("hahaRU.Storage.Entity.FunnyWord", b =>
@@ -102,60 +84,20 @@ namespace hahaRU.Migrations
                     b.Property<int>("DislikesCount")
                         .HasColumnType("int");
 
-                    b.Property<string>("ImgSrc")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Likes")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("LikesCount")
                         .HasColumnType("int");
 
                     b.Property<string>("Text")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("VideoSrc")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("FunnyWords");
-                });
-
-            modelBuilder.Entity("hahaRU.Storage.Entity.Mem", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Date")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Dislikes")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("DislikesCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ImgSrc")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Likes")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("LikesCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Text")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("VideoSrc")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Mems");
                 });
 
             modelBuilder.Entity("hahaRU.Storage.Entity.Permissions", b =>
@@ -272,19 +214,17 @@ namespace hahaRU.Migrations
                     b.Property<int>("DislikesCount")
                         .HasColumnType("int");
 
-                    b.Property<string>("ImgSrc")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Likes")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("LikesCount")
                         .HasColumnType("int");
 
-                    b.Property<string>("Text")
+                    b.Property<string>("Src")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("VideoSrc")
+                    b.Property<string>("Text")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -306,6 +246,36 @@ namespace hahaRU.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("VideoSrcs");
+                });
+
+            modelBuilder.Entity("hahaRU.Storage.Entity.mem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Date")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Dislikes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("DislikesCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Img")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Likes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("LikesCount")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("mems");
                 });
 
             modelBuilder.Entity("hahaRU.Storage.Entity.memPictures", b =>

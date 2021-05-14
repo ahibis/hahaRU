@@ -4,6 +4,7 @@ using hahaRU.Storage;
 using hahaRU.Storage.Entity;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,103 @@ namespace hahaRU.Managers
         {
             _context = context;
 
+        }
+
+        public object changeContentDisLiked(int postId, object type, HttpContext httpContext)
+        {
+            int? id = httpContext.Session.GetInt32("id");
+            if (id == null) return new JsonStatus() { status = "error", text = "вы не зарегестрированы" };
+            DbSet<Mem> db;
+            IContent post;
+            switch (type)
+            {
+                case "mem":
+                    post = _context.Mems.Where(post => post.Id == postId).First();
+                    break;
+                case "funnyWord":
+                    post = _context.FunnyWords.Where(post => post.Id == postId).First();
+                    break;
+                case "video":
+                    post = _context.Videos.Where(post => post.Id == postId).First();
+                    break;
+                default:
+                    post = _context.Anecdots.Where(post => post.Id == postId).First();
+                    break;
+            }
+            if (post == null) return new JsonStatus() { status = "error", text = "post не существует" };
+            IdList likes = new IdList(post.Dislikes);
+            if (likes.hasId((int)id))
+            {
+                likes.removeId((int)id);
+                post.Dislikes = likes.toString();
+                post.DislikesCount--;
+            }
+            else
+            {
+                likes.AddId((int)id);
+                post.Dislikes = likes.toString();
+                post.DislikesCount++;
+            }
+            _context.SaveChanges();
+            return new JsonStatus()
+            {
+                status = "ok",
+                text = "все окей",
+                value = new ContentData()
+                {
+                    IsDisLiked = likes.hasId((int)id) ? 1 : 0,
+                    DislikesCount = post.DislikesCount,
+                    Id = post.Id
+                }
+            };
+        }
+
+        public object changeContentLiked(int postId, string type, HttpContext httpContext)
+        {
+            int? id = httpContext.Session.GetInt32("id");
+            if (id == null) return new JsonStatus() { status = "error", text = "вы не зарегестрированы" };
+            IContent post;
+            switch (type)
+            {
+                case "mem":
+                    post = _context.Mems.Where(post => post.Id == postId).First();
+                    break;
+                case "funnyWord":
+                    post = _context.FunnyWords.Where(post => post.Id == postId).First();
+                    break;
+                case "video":
+                    post = _context.Videos.Where(post => post.Id == postId).First();
+                    break;
+                default:
+                    post = _context.Anecdots.Where(post => post.Id == postId).First();
+                    break;
+            }
+            if (post == null) return new JsonStatus() { status = "error", text = "post не существует" };
+            IdList likes = new IdList(post.Likes);
+            if (likes.hasId((int)id))
+            {
+                likes.removeId((int)id);
+                post.Likes = likes.toString();
+                post.LikesCount--;
+            }
+            else
+            {
+                likes.AddId((int)id);
+                post.Likes = likes.toString();
+                post.LikesCount++;
+            }
+            _context.SaveChanges();
+            return new JsonStatus()
+            {
+                status = "ok",
+                text = "все окей",
+                value = new ContentData()
+                {
+                    IsLiked = likes.hasId((int)id) ? 1 : 0,
+                    LikesCount = post.LikesCount,
+                    Id = post.Id
+                }
+            };
         }
 
         public object changeDisLiked(int postId, HttpContext httpContext)
@@ -82,17 +180,49 @@ namespace hahaRU.Managers
                     IsLiked= likes.hasId((int)id)?1:0,
                     LikesCount= post.LikesCount,
                     Id=post.Id
-                } };
+                } 
+            };
         }
 
-        public object checkDisLiked(int postId, HttpContext httpContext)
+        public object getContents(getPostReq data, HttpContext httpContext)
         {
-            return new object();
-        }
-
-        public object checkLiked(int postId, HttpContext httpContext)
-        {
-            return new object();
+            int count = data.Count ?? 20;
+            int offset = data.Offset ?? 0;
+            int? id = httpContext.Session.GetInt32("id");
+            id = (id == null) ? 0 : id;
+            List<IContent> posts;
+            switch (data.type)
+            {
+                case "mem":
+                    posts = _context.Mems.OrderByDescending(x => x.LikesCount).Skip(offset).Take(count).ToList().Cast<IContent>().ToList();
+                    break;
+                case "funnyWord":
+                    posts = _context.FunnyWords.OrderByDescending(x => x.LikesCount).Skip(offset).Take(count).ToList().Cast<IContent>().ToList();
+                    break;
+                case "video":
+                    posts = _context.Videos.OrderByDescending(x => x.LikesCount).Skip(offset).Take(count).ToList().Cast<IContent>().ToList();
+                    break;
+                default:
+                    posts = _context.Anecdots.OrderByDescending(x => x.LikesCount).Skip(offset).Take(count).ToList().Cast<IContent>().ToList();
+                    break;
+            }
+            List<ContentData> Contents = new List<ContentData>();
+            foreach (IContent post in posts)
+            {
+                Contents.Add(new ContentData()
+                {
+                    Id = post.Id,
+                    Text = post.Text,
+                    Date = post.Date,
+                    ImgSrc = post.ImgSrc,
+                    VideoSrc=post.VideoSrc,
+                    IsLiked = (new IdList(post.Likes)).hasId((int)id) ? 1 : 0,
+                    IsDisLiked = (new IdList(post.Dislikes)).hasId((int)id) ? 1 : 0,
+                    LikesCount = post.LikesCount,
+                    DislikesCount = post.DislikesCount
+                });
+            }
+            return Contents;
         }
 
         public object getPosts(getPostReq data, HttpContext httpContext)
@@ -103,7 +233,7 @@ namespace hahaRU.Managers
             id = (id==null)?0:id;
             List<Post> posts;
             if (data.UserId == null)
-                posts= _context.Posts.OrderByDescending(x => x.Likes).Skip(offset).Take(count).ToList();
+                posts= _context.Posts.OrderByDescending(x => x.LikesCount).Skip(offset).Take(count).ToList();
             else
                 posts = _context.Posts.Where(e => e.UserId == data.UserId).OrderByDescending(x => x.Id).Skip(offset).Take(count).ToList();
 
@@ -126,6 +256,40 @@ namespace hahaRU.Managers
             return Posts;
         }
 
+        public object getRundomAnecdot()
+        {
+            return new object();
+        }
+
+        public object getRundomMemImg()
+        {
+            int count = _context.memPictures.Count();
+            if (count == 0) return new JsonStatus() { status = "error", text = "нет изображений" };
+            Random rnd = new Random();
+            int id = rnd.Next(1, count);
+            memPictures mem = _context.memPictures.Where(mem => mem.Id == id).First();
+            return new JsonStatus() { status = "ok", value = mem };
+        }
+
+        public object getRundomMemText()
+        {
+            int count = _context.memTexts.Count();
+            if (count == 0) return new JsonStatus() { status = "error", text = "нет текстов" };
+            Random rnd = new Random();
+            int id = rnd.Next(1, count);
+            memText mem = _context.memTexts.Where(mem => mem.Id == id).First();
+            return new JsonStatus() { status = "ok", value=mem };
+        }
+
+        public object getRundomVideo()
+        {
+            int count = _context.VideoSrcs.Count();
+            if (count == 0) return new JsonStatus() { status = "error", text = "нет видео" };
+            Random rnd = new Random();
+            int id = rnd.Next(1, count);
+            VideoSrc video = _context.VideoSrcs.Where(mem => mem.Id == id).First();
+            return new JsonStatus() { status = "ok", value = video };
+        }
 
         public string getUser(int id)
         {
@@ -143,6 +307,11 @@ namespace hahaRU.Managers
             if (users.Count == 0) return "{}";
             users[0].Password = null;
             return JsonSerializer.Serialize(users[0]);
+        }
+
+        public object getVideos(getPostReq data, HttpContext httpContext)
+        {
+            throw new NotImplementedException();
         }
 
         public object sendPost(Post post, HttpContext httpContext)
@@ -182,5 +351,6 @@ namespace hahaRU.Managers
             _context.SaveChanges();
             return "ok";
         }
+        
     }
 }

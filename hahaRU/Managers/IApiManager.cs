@@ -16,9 +16,14 @@ namespace hahaRU.Managers
         string updateUser(User user, HttpContext httpContext);
         object sendPost(Post post, HttpContext httpContext);
         object getPosts(getPostReq data, HttpContext httpContext);
-        object checkLiked(int postId, HttpContext httpContext);
-        object checkDisLiked(int postId, HttpContext httpContext);
         object changeLiked(int postId, HttpContext httpContext);
         object changeDisLiked(int postId, HttpContext httpContext);
+        object getRundomMemText();
+        object getRundomAnecdot();
+        object getRundomVideo();
+        object getRundomMemImg();
+        object getContents(getPostReq data, HttpContext httpContext);
+        object changeContentLiked(int postId, string type, HttpContext httpContext);
+        object changeContentDisLiked(int postId, object type, HttpContext httpContext);
     }
 }

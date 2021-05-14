@@ -13,8 +13,18 @@ namespace hahaRU.Storage
         {
         }
 
-        public DbSet<User> Users { get; set; }
-        public DbSet<Post> Posts { get; set; }
-        public DbSet<srcImage> Images { get; set; }
+        public DbSet<User> Users { get; set; }//Юзеры
+        public DbSet<Post> Posts { get; set; }//Посты
+        public DbSet<Anecdot> Anecdots { get; set; }//Сгенерированные анекдоты
+        public DbSet<FunnyWord> FunnyWords { get; set; }//Сгенерированные Слова
+        public DbSet<Mem> Mems { get; set; }//Сгенерированные мемы
+        public DbSet<Video> Videos { get; set; }//Сгенерированные видео
+        public DbSet<AnecdotTexts> AnecdotTexts { get; set; }//1 часть анекдота
+        public DbSet<AnecdotEnd> AnecdotEnds { get; set; }//2 часть анекдота
+        public DbSet<memPictures> memPictures { get; set; }//рандомная картинка
+        public DbSet<memText>   memTexts { get; set; }//рандомный текст
+        public DbSet<VideoSrc> VideoSrcs { get; set; }//url видео
+        public DbSet<Permissions> Permissions { get; set; }//парметры пользователей
+        
     }
 }

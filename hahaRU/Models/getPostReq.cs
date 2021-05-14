@@ -11,5 +11,6 @@ namespace hahaRU.Models
         public int? Offset { get; set; }
         public int? Sort { get; set; }
         public int? UserId { get; set; }
+        public string type { get; set; }
     }
 }
