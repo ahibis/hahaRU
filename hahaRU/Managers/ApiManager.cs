@@ -20,7 +20,6 @@ namespace hahaRU.Managers
         public ApiManager(Context context)
         {
             _context = context;
-
         }
 
         public object changeContentDisLiked(int postId, object type, HttpContext httpContext)

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using hahaRU.Managers;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,13 @@ namespace hahaRU.Controllers
 {
     public class GeneratorController : Controller
     {
+        private IGeneratorManager _manager;
+
+        public GeneratorController(IGeneratorManager manager)
+        {
+            _manager = manager;
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -15,8 +23,7 @@ namespace hahaRU.Controllers
 
         public IActionResult Jokes()
         {
-            anecdotGen a = new anecdotGen();
-            ViewBag.word = a.word;
+            ViewBag.word = _manager.anecdotGen();
             return View();
         }
         public IActionResult Word()
@@ -28,7 +35,7 @@ namespace hahaRU.Controllers
         public IActionResult YT()
         {
             rngYouTube a = new rngYouTube();
-            ViewBag.word = a.url;
+            ViewBag.word = _manager.url;
             return View();
         }
     }

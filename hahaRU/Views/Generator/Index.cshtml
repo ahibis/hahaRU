@@ -8,23 +8,29 @@
 	    	<h3>Тексты</h3>
 	    	<div v-for="text,i in texts">
 	    		<h4>Текст {{i+1}}</h4>
-	    		<div>
-	    			текст:<input v-model="text.text" placeholder="введите текст">
-	    			размер:<input v-model="text.size" type="number">
+	    		<div class="textPar">
+	    			текст:<input v-model="text.text" v-on:input="input" placeholder="введите текст">
+	    			размер:<input v-model="text.size" type="number" v-on:input="input">
+	    			цвет:<input v-model="text.fillStyle" type="color" v-on:input="input">
 	    		</div>
-	    		
-	    		<span>генерировать текст</span>
+	    		<button>генерировать текст</button>
 	    	</div>
 	    	<h3>Картинки</h3>
 	    	<div v-for="text,i in imgs">
 	    		<h4>Картинка {{i+1}}</h4>
-	    		<span>сгенерировать картинку</span>
-	    		<span>загрузить картинку</span>
+	    		<button>сгенерировать картинку</button>
+	    		<button>загрузить картинку</button>
 	    	</div>
 	    </div>
 	</div>  	  
 </div>
+<style>
+	.textPar{
+		display: grid;
+		grid-template-columns: 1fr 1fr;
 
+	}
+</style>
 
 
 
