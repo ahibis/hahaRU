@@ -9,16 +9,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using hahaRU.Models;
+using Microsoft.AspNetCore.Hosting;
 
 namespace hahaRU.Controllers
 {
     public class apiController : Controller
     {
         IApiManager _manager;
-
-        public apiController(IApiManager manager)
+        IWebHostEnvironment _appEnvironment;
+        public apiController(IApiManager manager, IWebHostEnvironment appEnvironment)
         {
             _manager = manager;
+            _appEnvironment = appEnvironment;
         }
 
         [HttpPost]
@@ -42,11 +44,7 @@ namespace hahaRU.Controllers
         {
             return Json(_manager.sendPost(post, HttpContext));
         }
-        [HttpPost]
-        public string getPostImg(IFormFile uploadImage)
-        {
-            return "ok";
-        }
+        
         [HttpPost]
         public JsonResult getPosts(getPostReq data)
         {
@@ -93,9 +91,28 @@ namespace hahaRU.Controllers
             return Json(_manager.getRundomVideo());
         }
         [HttpPost]
-        public JsonResult saveMem()
+        public string getPostImg(IFormFile uploadImage)
         {
-            return Json(_manager.getRundomVideo());
+            return "ok";
+        }
+        [HttpPost]
+        public JsonResult saveAva(IFormFile uploadImage)
+        {
+            if (Request.Form == null) return Json(new object());
+            var Files = Request.Form.Files;
+            return Json(_manager.saveAva(Files, _appEnvironment.WebRootPath, HttpContext));
+        }
+        [HttpPost]
+        public JsonResult saveMem(string imgBase64)
+        {
+            return Json(_manager.saveMem(imgBase64, _appEnvironment.WebRootPath));
+        }
+        [HttpPost]
+        public JsonResult saveMemPic(IList<IFormFile> files)
+        {
+            if (Request.Form==null) return Json(new object());
+            var Files = Request.Form.Files;
+            return Json(_manager.saveMemPic(Files, _appEnvironment.WebRootPath));
         }
         [HttpPost]
         public JsonResult getContents(getPostReq data)

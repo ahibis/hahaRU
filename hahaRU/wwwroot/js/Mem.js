@@ -29,6 +29,23 @@
         },
         input:async function(){
             await generator.draw();
+        },
+        textGenerated:async function(i){
+            this.texts[i].text=await generator.getRandomText();
+            await generator.draw()
+        },
+        imgGenerated:async function(i){
+            this.imgs[i].src=await generator.getRandomImg();
+            await generator.draw()
+        },
+        typeChange:async function() {
+            await generator.changeType(this.type);
+        },
+        pictureLoad:async function(i){
+            let data=await sendFiles("/api/saveMemPic");
+            if(data.value)
+                vm.imgs[i].src=data.value;
+            await generator.draw()
         }
     }
 })
@@ -98,6 +115,19 @@ class Img {
     }
 }
 class MemGenerator{
+    async getRandomText(){
+        let data=await api("getRundomMemText");
+            if(data.value)
+                return data.value.text;
+            return "Ахаха-Хэхэ"
+    }
+    async getRandomImg(){
+        let data=await api("getRundomMemImg");
+            if(data.value)
+                return '/img/memImgs/'+data.value.imgSrc;
+            return '/img/memImgs/Putin.jpg'
+
+    }
     constructor() {
         this.el = document.getElementById("mem");
         this.ctx = this.el.getContext("2d")
@@ -159,9 +189,6 @@ class MemGenerator{
                 let x2=text.x+text.width;
                 let y2=text.y+text.size;
                 target=null;
-                if(mouseX>=x1 && mouseX<=x2 && mouseY>=y1 && mouseY<=y2){
-                    
-                }
             }
         });
     }
@@ -192,34 +219,73 @@ class MemGenerator{
         link.click();
     }
     downImg() {
-        this.saveImage(this.certificate);
+        this.saveImage(this.canvasToImg(this.el));
     }
+
     async changeType(type){
         let texts=vm.texts.map(e=>e.text);
         let imgs=vm.imgs.map(e=>e.src)
         vm.texts=[];
         vm.imgs=[];
         if(type=="обычный"){
-            let img=new Img("/img/memImgs/Putin.jpg",0,0,this.width)
+            let src=await this.getRandomImg()
+            let img=new Img(src,0,0,this.width)
             this.height=await img.getHeight();
-            let text=new Text("Новый текст",this.width*0.1,this.height*0.7)
+            let text=new Text(await this.getRandomText(),this.width*0.1,this.height*0.7)
             vm.imgs.push(img);
             vm.texts.push(text);
             this.draw().then();
             return;
         }
+        if(type=="демотиватор"){
+            let img=new Img(await this.getRandomImg(),50,50,this.width-100)
+            let height=await img.getHeight()
+            this.height=height+150;
+            let text=new Text(await this.getRandomText(),50,height+75)
+            vm.imgs.push(img);
+            vm.texts.push(text);
+            this.draw().then();
+            return;
+        }
+        if(type=="многокартиночный"){
+            let img1=new Img(await this.getRandomImg(),0,0,this.width/2)
+            let img2=new Img(await this.getRandomImg(),this.width/2,0,this.width/2)
+            let height1=Math.min(await img1.getHeight(),await img2.getHeight());
+            let img3=new Img(await this.getRandomImg(),0,height1,this.width/2)
+            let img4=new Img(await this.getRandomImg(),this.width/2,height1,this.width/2)
+            let height2=Math.min(await img3.getHeight(),await img4.getHeight());
+            this.height=height1+height2;
+            vm.imgs.push(img1);
+            vm.imgs.push(img2);
+            vm.imgs.push(img3);
+            vm.imgs.push(img4);
+            vm.texts.push(new Text(await this.getRandomText(),50,height1-50));
+            vm.texts.push(new Text(await this.getRandomText(),this.width/2+50,height1-50));
+            vm.texts.push(new Text(await this.getRandomText(),50,this.height-50));
+            vm.texts.push(new Text(await this.getRandomText(),this.width/2+50,this.height-50));
+            this.draw().then();
+            return;
+        }
+    }
+    sendMem(){
+        api("saveMem",{imgBase64:this.el.toDataURL().split(",")[1]}).then(data=>{
+            if(data.value)
+                vm.Posts = [data.value, ...vm.Posts]
+        });
     }
     async memCreate() {
 
     }
     async draw() {
-            for(let img in vm.imgs){
-                await vm.imgs[img].draw(this.ctx)
-            }
-            for(let text in vm.texts){
-                await vm.texts[text].draw(this.ctx)
-            }
+        this.ctx.fillStyle="#000000";
+        this.ctx.fillRect(0,0,this.width,this.height)
+        for(let img in vm.imgs){
+            await vm.imgs[img].draw(this.ctx)
         }
+        for(let text in vm.texts){
+            await vm.texts[text].draw(this.ctx)
+        }  
+    }
 }
 
 generator = new MemGenerator();

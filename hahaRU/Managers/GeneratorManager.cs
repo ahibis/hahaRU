@@ -1,4 +1,5 @@
 ﻿using hahaRU.Storage;
+using hahaRU.Storage.Entity;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -65,6 +66,13 @@ namespace hahaRU.Managers
                 var q = "LP5k6pO37kw";
                 return q;
             }
+        }
+
+        public void addFunnyWord(string word)
+        {
+            FunnyWord Word = new FunnyWord() { Text = word };
+            _context.FunnyWords.Add(Word);
+            _context.SaveChanges();
         }
     }
 }

@@ -29,6 +29,7 @@ namespace hahaRU.Controllers
         public IActionResult Word()
         {
             wordGen a = new wordGen();
+            _manager.addFunnyWord(a.word);
             ViewBag.word = a.word;
             return View();
         }

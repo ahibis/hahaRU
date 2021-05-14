@@ -1,13 +1,24 @@
-﻿<body>
-    <div>
-        <div class="buttons">
-            <div id="button" , button onClick="window.location.reload();">
-                <p id="gen">Сгенерировать</p>
+﻿<link href="/css/Home.css" rel="stylesheet" />
+<div id="app">
+    <div class="buttons">
+        <div id="button" button onClick="window.location.reload();">
+            <p id="gen">Сгенерировать</p>
+        </div>
+    </div>
+    <div id="funnyword">
+        <p>@ViewBag.word</p>
+    </div>
+    <div style="height:200px"></div>
+    <div class="block" v-for="post in Posts">
+        <div class="inner" >
+            <div class="date">{{post.date}}</div>
+            <div class="anekdot">{{post.text}}</div>
+            <div class="between">
+                <div class="like" v-on:click="changeLike(post.id)" :id="post.id">{{post.likesCount}}<img src="/img/Like 1.png" class="like1"></div>
+                <div class="dislike" v-on:click="changeDisLike(post.id)" :id="post.id">{{post.dislikesCount}}<img src="/img/Like 2.png" class="dislike1"></div>
             </div>
         </div>
-        <div id="funnyword">
-            <p>@ViewBag.word</p>
-        </div>
+    </div> 
+</div>
+<script src="~/js/FunnyWord.js"></script>    
 
-    </div>
-</body>

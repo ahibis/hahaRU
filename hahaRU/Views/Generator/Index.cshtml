@@ -1,28 +1,48 @@
-﻿<div id="app">
+﻿<link rel="stylesheet" href="/css/Home.css">
+<div id="app">
 	<div class="between">
 		<canvas src="canvas" id="mem"></canvas>
 	    <div>
-	    	<select v-model="type">
-	    		<option v-for="type in types" :value="type">{{type}}</option>
+	    	<select v-model="type" v-on:change="typeChange">
+	    		<option v-for="type in types" :value="type" >{{type}}</option>
 	    	</select>
 	    	<h3>Тексты</h3>
 	    	<div v-for="text,i in texts">
 	    		<h4>Текст {{i+1}}</h4>
 	    		<div class="textPar">
-	    			текст:<input v-model="text.text" v-on:input="input" placeholder="введите текст">
+	    			текст:<textarea v-model="text.text" v-on:input="input" placeholder="введите текст"></textarea>
 	    			размер:<input v-model="text.size" type="number" v-on:input="input">
 	    			цвет:<input v-model="text.fillStyle" type="color" v-on:input="input">
 	    		</div>
-	    		<button>генерировать текст</button>
+	    		<button v-on:click="textGenerated(i)">генерировать текст</button>
 	    	</div>
 	    	<h3>Картинки</h3>
 	    	<div v-for="text,i in imgs">
 	    		<h4>Картинка {{i+1}}</h4>
-	    		<button>сгенерировать картинку</button>
-	    		<button>загрузить картинку</button>
+	    		<button v-on:click="imgGenerated(i)">сгенерировать картинку</button>
+	    		<button v-on:click="pictureLoad(i)">загрузить картинку</button>
 	    	</div>
+	    	<button onclick="generator.downImg()">Скачать мем</button>
 	    </div>
-	</div>  	  
+	</div> 
+	<div class="center">
+		<div id="button" button onClick="generator.sendMem()">
+	        <p id="gen" >Поделиться</p>
+	    </div>
+	</div>
+	
+
+    <div class="block" v-for="post in Posts">
+        <div class="inner" >
+            <div class="date">{{post.date}}</div>
+            <div class="anekdot"><img :src="post.
+            	imgSrc" alt=""></div>
+            <div class="between">
+                <div class="like" v-on:click="changeLike(post.id)" :id="post.id">{{post.likesCount}}<img src="/img/Like 1.png" class="like1"></div>
+                <div class="dislike" v-on:click="changeDisLike(post.id)" :id="post.id">{{post.dislikesCount}}<img src="/img/Like 2.png" class="dislike1"></div>
+            </div>
+        </div>
+    </div> 
 </div>
 <style>
 	.textPar{
