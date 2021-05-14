@@ -8,17 +8,17 @@ using System.Threading.Tasks;
 
 namespace hahaRU.Storage.Entity
 {
-    public class Post 
+    public class FunnyWord : IContent
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        [Required]
-        public string Text { get; set; }
         [DefaultValue("2021-04-15")]
         public string Date { get; set; }
-        [Required]
-        public int UserId { get; set; }
+        [DefaultValue("")]
+        public string Text { get; set; }
+        [DefaultValue("")]
+        public string VideoSrc { get; set; }
         [DefaultValue("")]
         public string ImgSrc { get; set; }
         [DefaultValue("")]
@@ -28,6 +28,6 @@ namespace hahaRU.Storage.Entity
         [DefaultValue(0)]
         public int LikesCount { get; set; }
         [DefaultValue(0)]
-        public int DislikesCount{ get; set; }
+        public int DislikesCount { get; set; }
     }
 }

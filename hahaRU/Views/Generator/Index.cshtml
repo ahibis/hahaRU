@@ -1,1 +1,29 @@
-﻿                                                                                 
+﻿<div id="app">
+	<div class="between">
+		<canvas src="canvas" id="mem"></canvas>
+	    <div>
+	    	<select v-model="type">
+	    		<option v-for="type in types" :value="type">{{type}}</option>
+	    	</select>
+	    	<h3>Тексты</h3>
+	    	<div v-for="text,i in texts">
+	    		<h4>Текст {{i}}</h4>
+	    		текст:<input v-model="text.text" placeholder="введите текст">
+	    		размер:<input v-model="text.size" type="number">
+	    		<span>генерировать текст</span>
+	    	</div>
+	    	<h3>Картинки</h3>
+	    	<div v-for="text,i in texts">
+	    		<h4>Картинка {{i}}</h4>
+	    		<span>сгенерировать картинку</span>
+	    		<span>загрузить картинку</span>
+	    	</div>
+	    </div>
+	</div>  	  
+</div>
+
+
+
+
+
+<script src="~/js/Mem.js"></script>                                                                                
