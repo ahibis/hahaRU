@@ -5,7 +5,8 @@
         texts: [],
         imgs: [],
         type: "обычный",
-        types: ["обычный","демотиватор","многокартиночный"]
+        types: ["обычный","демотиватор","многокартиночный"],
+        fonts: ["Impact","Lobster","Obelix Pro","Fixedsys"]
     },
     methods: {
         changeLike: async function (postId) {
@@ -128,6 +129,11 @@ class MemGenerator{
             return '/img/memImgs/Putin.jpg'
 
     }
+    async addText(){
+        let text=new Text(await this.getRandomText(),0,0)
+        vm.texts.push(text);
+        await this.draw();
+    }
     constructor() {
         this.el = document.getElementById("mem");
         this.ctx = this.el.getContext("2d")
@@ -205,6 +211,7 @@ class MemGenerator{
     set height(w){
         this._height=w;
          this.el.height=w;
+         generator.el.style.height=w;
     }
     canvasToImg(ctx) {
         let src = ctx.toDataURL();
@@ -221,7 +228,9 @@ class MemGenerator{
     downImg() {
         this.saveImage(this.canvasToImg(this.el));
     }
-
+    async update(type){
+       
+    }
     async changeType(type){
         let texts=vm.texts.map(e=>e.text);
         let imgs=vm.imgs.map(e=>e.src)
@@ -269,8 +278,10 @@ class MemGenerator{
     }
     sendMem(){
         api("saveMem",{imgBase64:this.el.toDataURL().split(",")[1]}).then(data=>{
-            if(data.value)
+            if (data.value) {
                 vm.Posts = [data.value, ...vm.Posts]
+                lastPost += 1;
+            }       
         });
     }
     async memCreate() {
@@ -294,6 +305,6 @@ let lastPost = 0;
 async function load() {
     let posts = await api("getContents", { Offset: lastPost, Count: 20, type:"mem"  });
     lastPost += posts.length;
-    vm.Posts = posts;
+    vm.Posts = [...vm.Posts,...posts];
 }
 load().then();

@@ -33,6 +33,9 @@ namespace hahaRU.Managers
 
             //string[] A = { "Вегетарианцы не стареют. Они увядают.", "- Мама, а правда, что я получился нечаянно? - Сынок, буду откровенна - не очень-то ты и получился.- Мама, а правда, что я получился нечаянно? - Сынок, буду откровенна - не очень-то ты и получился.- Мама, а правда, что я получился нечаянно? - Сынок, буду откровенна - не очень-то ты и получился.- Мама, а правда, что я получился нечаянно? - Сынок, буду откровенна - не очень-то ты и получился.- Мама, а правда, что я получился нечаянно? - Сынок, буду откровенна - не очень-то ты и получился.- Мама, а правда, что я получился нечаянно? - Сынок, буду откровенна - не очень-то ты и получился.- Мама, а правда, что я получился нечаянно? - Сынок, буду откровенна - не очень-то ты и получился.- Мама, а правда, что я получился нечаянно? - Сынок, буду откровенна - не очень-то ты и получился.- Мама, а правда, что я получился нечаянно? - Сынок, буду откровенна - не очень-то ты и получился.- Мама, а правда, что я получился нечаянно? - Сынок, буду откровенна - не очень-то ты и получился.- Мама, а правда, что я получился нечаянно? - Сынок, буду откровенна - не очень-то ты и получился.- Мама, а правда, что я получился нечаянно? - Сынок, буду откровенна - не очень-то ты и получился.- Мама, а правда, что я получился нечаянно? - Сынок, буду откровенна - не очень-то ты и получился.- Мама, а правда, что я получился нечаянно? - Сынок, буду откровенна - не очень-то ты и получился.- Мама, а правда, что я получился нечаянно? - Сынок, буду откровенна - не очень-то ты и получился.- Мама, а правда, что я получился нечаянно? - Сынок, буду откровенна - не очень-то ты и получился.- Мама, а правда, что я получился нечаянно? - Сынок, буду откровенна - не очень-то ты и получился.", "Ищете женщину? Лучше ищите деньги! Женщина сама вас найдет.", "От импотенции еще ни кто не умирал, правда ни кто и не рождался.", "Заходит как-то в бар глухонемой и говорит: . . . . . ." };
             //s = A[rnd.Next(0, 5)];
+            Anecdot anecdot= new Anecdot() { Text=s3 };
+            _context.Anecdots.Add(anecdot);
+            _context.SaveChanges();
             return s3;
         }
         private static Random random = new Random();
@@ -44,7 +47,7 @@ namespace hahaRU.Managers
             return new string(Enumerable.Repeat(chars, length)
               .Select(s => s[random.Next(s.Length)]).ToArray());
         }
-        public string GetURL()
+        public string GetURL1()
         {
             //if (_context.VideoSrcs.Count()!=0) //удаление потом допишем
             //{
@@ -69,6 +72,16 @@ namespace hahaRU.Managers
                     dynamic jsonObject = JsonConvert.DeserializeObject(json);
                     foreach (var line in jsonObject["items"])
                     {
+                        Config conf=_context.Configs.Single(config => config.key == "videoCount");
+                        if (conf == null)
+                        {
+                            conf = new Config() { key = "videosCount", Value = 0 };
+                            _context.Configs.Add(conf);
+                            _context.SaveChanges();
+                            conf = _context.Configs.Single(config => config.key == "videoCount");
+                        }
+                        conf.Value += 1;
+                        _context.SaveChanges();
                         var newurl = new VideoSrc() { Src = line["id"]["videoId"] };
                         _context.Add(newurl);
                         _context.SaveChanges();
@@ -90,7 +103,14 @@ namespace hahaRU.Managers
                 return q;
             }
         }
-
+        public string GetURL()
+        {
+            string url = GetURL1();
+            Video video = new Video() { VideoSrc=url};
+            _context.Videos.Add(video);
+            _context.SaveChanges();
+            return url;
+        }
         public void addFunnyWord(string word)
         {
             FunnyWord Word = new FunnyWord() { Text = word };

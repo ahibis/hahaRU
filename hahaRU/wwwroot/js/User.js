@@ -23,7 +23,14 @@
             this.text = "";
             let posts = await api("getPosts", { UserId: my.Id, Offset: 0, Count: 1 });
             console.log(posts);
+            lastPost += posts.length;
             vm.Posts = [...posts, ...vm.Posts];
+        },
+        avaChange: async function () {
+            if (!(ID == 0 || this.Id == ID)) return
+            let data = await sendFiles("api/saveAva");
+            if (data.value)
+                this.AvatarSrc = data.value;
         },
         changeLike: async function (postId) {
             console.log(postId)
@@ -63,6 +70,11 @@ async function getPosts() {
     lastPost += posts.length;
     vm.Posts = [...vm.Posts,...posts ]
 }
+$(window).scroll(async function(){
+    if($(window).scrollTop()+$(window).height()>=$(document).height()){
+        let count=await getPosts();
+    }
+})
 $("#app").hide()
 $(document).ready(async function () {
     

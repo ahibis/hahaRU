@@ -9,8 +9,8 @@ using hahaRU.Storage;
 namespace hahaRU.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20210514122922_init")]
-    partial class init
+    [Migration("20210515011536_mig3")]
+    partial class mig3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -86,6 +86,25 @@ namespace hahaRU.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("AnecdotTexts");
+                });
+
+            modelBuilder.Entity("hahaRU.Storage.Entity.Config", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Value")
+                        .HasColumnType("int");
+
+                    b.Property<string>("key")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Configs");
                 });
 
             modelBuilder.Entity("hahaRU.Storage.Entity.FunnyWord", b =>

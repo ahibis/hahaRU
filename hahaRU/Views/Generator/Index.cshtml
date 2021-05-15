@@ -1,4 +1,7 @@
 ﻿<link rel="stylesheet" href="/css/Home.css">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+<div style="height: 50px"></div>
 <div id="app">
 	<div class="between">
 		<canvas src="canvas" id="mem"></canvas>
@@ -13,8 +16,13 @@
 	    			текст:<textarea v-model="text.text" v-on:input="input" placeholder="введите текст"></textarea>
 	    			размер:<input v-model="text.size" type="number" v-on:input="input">
 	    			цвет:<input v-model="text.fillStyle" type="color" v-on:input="input">
+	    			шрифт:<select v-model="text.font" v-on:change="input">
+			    		<option v-for="font in fonts" :value="font" >{{font}}</option>
+			    	</select>
 	    		</div>
 	    		<button v-on:click="textGenerated(i)">генерировать текст</button>
+	    		<button onclick="generator.addText().then()">добавить текст</button>
+	    		<button v-on:click="typeChange">перегенерировать мем</button>
 	    	</div>
 	    	<h3>Картинки</h3>
 	    	<div v-for="text,i in imgs">
@@ -30,7 +38,7 @@
 	        <p id="gen" >Поделиться</p>
 	    </div>
 	</div>
-	
+	<div style="height: 100px"></div>
 
     <div class="block" v-for="post in Posts">
         <div class="inner" >

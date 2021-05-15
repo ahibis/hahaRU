@@ -316,7 +316,22 @@ namespace hahaRU.Managers
         }
         public object saveAva(IFormFileCollection files, string webRootPath, HttpContext httpContext)
         {
-            throw new NotImplementedException();
+            int? id = httpContext.Session.GetInt32("id");
+            if (id == null) return new JsonStatus() { status = "error", text = "Вы не авторизовались" };
+            string path = "";
+            if(files.Count==0) return new JsonStatus() { status = "error", text = "Картинка не найдена" };
+            var file = files[0];
+            path = "/img/avaImgs/" + file.FileName;
+                using (var fileStream = new FileStream(webRootPath + path, FileMode.Create))
+                {
+                    file.CopyTo(fileStream);
+                }
+                memPictures pic = new memPictures() { ImgSrc = file.FileName };
+            User user = _context.Users.Single(user => user.Id == (int)id);
+            if(user==null) return new JsonStatus() { status = "error", text = "Вы не авторизовались 2" };
+            user.AvatarSrc = path;
+            _context.SaveChanges();
+            return new JsonStatus() { status = "ok", value = path };
         }
 
         public object saveMem(IFormFileCollection files, string webRootPath)

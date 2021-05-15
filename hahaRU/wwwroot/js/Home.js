@@ -34,6 +34,11 @@ async function load() {
         if (!vm.Users[Post.userId])
             vm.Users[Post.userId] = JSON.parse(await api("getUser", { id: Post.userId })); 
     }
-    vm.Posts = posts;
+    vm.Posts = [...vm.Posts,...posts];
 }
+$(window).scroll(async function(){
+    if($(window).scrollTop()+$(window).height()>=$(document).height()){
+        let count=await load();
+    }
+})
 load().then();

@@ -25,6 +25,6 @@ namespace hahaRU.Storage
         public DbSet<memText>   memTexts { get; set; }//рандомный текст
         public DbSet<VideoSrc> VideoSrcs { get; set; }//url видео
         public DbSet<Permissions> Permissions { get; set; }//парметры пользователей
-        
+        public DbSet<Config> Configs { get; set; }
     }
 }

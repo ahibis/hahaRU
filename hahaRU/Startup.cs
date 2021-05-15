@@ -28,7 +28,7 @@ namespace hahaRU
         {
             services.AddControllersWithViews();
             services.AddDbContext<Context>(options => 
-            options.UseSqlServer("Server=KACHPC;Database=haha;Trusted_Connection=True;"));
+            options.UseSqlServer("Server=WIN-85MBVBQ7BO6;Database=haha2;Trusted_Connection=True;"));
             services.AddTransient<IApiManager, ApiManager>();
             services.AddTransient<IAuthManager, AuthManager>();
             services.AddTransient<IGeneratorManager, GeneratorManager>();

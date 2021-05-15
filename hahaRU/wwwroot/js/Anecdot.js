@@ -6,7 +6,7 @@
     methods: {
         changeLike: async function (postId) {
             console.log(postId)
-            let data = await api("changeContentLiked", { postId: postId, type: "funnyWord"  });
+            let data = await api("changeContentLiked", { postId: postId, type: "anecdot"  });
             console.log(data)
             if (data.value) {
                 let post = this.Posts.filter(post => post.id == postId)[0]
@@ -15,7 +15,7 @@
             }
         },
         changeDisLike: async function (postId) {
-            let data = await api("changeContentDisLiked", { postId: postId, type:"funnyWord" });
+            let data = await api("changeContentDisLiked", { postId: postId, type:"anecdot" });
             console.log(data)
             if (data.value) {
                 let post = this.Posts.filter(post => post.id == postId)[0]
@@ -27,16 +27,13 @@
 })
 let lastPost = 0;
 async function load() {
-    let posts = await api("getContents", { Offset: lastPost, Count: 20, type:"funnyWord"  });
+    let posts = await api("getContents", { Offset: lastPost, Count: 20, type:"anecdot"  });
     lastPost += posts.length;
     vm.Posts = [...vm.Posts,...posts];
-    return posts.length;
 }
-let end=0;
 $(window).scroll(async function(){
-	if($(window).scrollTop()+$(window).height()>=$(document).height()){
-	    let count=await load();
-	}
+    if($(window).scrollTop()+$(window).height()>=$(document).height()){
+        let count=await load();
+    }
 })
-
 load().then();
