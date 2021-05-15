@@ -1,4 +1,13 @@
-﻿.intro {
+﻿@font-face {
+    font-family: "Obelix Pro";
+    src: url("8477.ttf") format('ttf');
+}
+@font-face {
+    font-family: "Fixedsys";
+    src: url("Fixedsys.ttf") format('ttf');
+}
+
+.intro {
     padding-top: 130px;
     font-family: Montserrat;
     font-style: italic;
@@ -27,6 +36,7 @@
 .ava {
     width: 46px;
     height: 46px;
+    border-radius:50%;
 }
 
 .inner {

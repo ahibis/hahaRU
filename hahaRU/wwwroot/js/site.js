@@ -56,3 +56,96 @@ $(document).ready(async function () {
     my.AvatarSrc = my.AvatarSrc || "/img/logo.png";
     $("#userImg").attr("src", my.AvatarSrc);
 })
+
+function sendFiles(Url, DATA={}) {
+    return new Promise(resolve => {
+        let el=document.createElement("input");
+        el.type="file"
+        el.multiple=true;
+        el.click()
+        el.onchange=function(){
+           files = el.files;
+            var data = new FormData();
+            $.each(files, function (key, value) {
+                data.append(key, value);
+            });
+            data.append('my_file_upload', 1);
+            for (key in DATA) {
+                data.append(key, DATA[key])
+            }
+            $.ajax({
+                url: Url,
+                type: 'POST', // важно!
+                data: data,
+                cache: false,
+                //dataType    : 'json',
+                processData: false,
+                contentType: false,
+                success: function (answer, status, jqXHR) {// ОК - файлы загружены
+                    resolve(answer)
+                },
+                error: function (jqXHR, status, errorThrown) {// функция ошибки ответа сервера
+                    console.log('ОШИБКА AJAX запроса: ' + status, jqXHR);
+                }
+            }); 
+        }
+    })
+}
+function sendFiles2(element, Url, func) {
+    files = element.files;
+    var data = new FormData();
+    $.each(files, function (key, value) {
+        data.append(key, value);
+    });
+    data.append('my_file_upload', 1);
+    $.ajax({
+        url: Url,
+        type: 'POST', // важно!
+        data: data,
+        cache: false,
+        //dataType    : 'json',
+        processData: false,
+        contentType: false,
+        success: function (answer, status, jqXHR) {// ОК - файлы загружены
+            console.log(answer)
+            func(JSON.parse(answer))
+        },
+        error: function (jqXHR, status, errorThrown) {// функция ошибки ответа сервера
+            console.log('ОШИБКА AJAX запроса: ' + status, jqXHR);
+        }
+    });
+}
+function sendImg(Url,img, DATA={}) {
+    return new Promise(resolve => {
+        let el=document.createElement("input");
+        el.type="file"
+        el.multiple=true;
+        el.click()
+        el.onchange=function(){
+           files = el.files;
+            var data = new FormData();
+            $.each(files, function (key, value) {
+                data.append(key, value);
+            });
+            data.append('my_file_upload', 1);
+            for (key in DATA) {
+                data.append(key, DATA[key])
+            }
+            $.ajax({
+                url: Url,
+                type: 'POST', // важно!
+                data: data,
+                cache: false,
+                //dataType    : 'json',
+                processData: false,
+                contentType: false,
+                success: function (answer, status, jqXHR) {// ОК - файлы загружены
+                    resolve(answer)
+                },
+                error: function (jqXHR, status, errorThrown) {// функция ошибки ответа сервера
+                    console.log('ОШИБКА AJAX запроса: ' + status, jqXHR);
+                }
+            }); 
+        }
+    })
+}

@@ -1,13 +1,12 @@
 ﻿let vm = new Vue({
     el: "#app",
     data: {
-        Posts: [],
-        Users: {}
+        Posts: []
     },
     methods: {
         changeLike: async function (postId) {
             console.log(postId)
-            let data = await api("changeLiked", { postId: postId });
+            let data = await api("changeContentLiked", { postId: postId, type: "video"  });
             console.log(data)
             if (data.value) {
                 let post = this.Posts.filter(post => post.id == postId)[0]
@@ -16,7 +15,7 @@
             }
         },
         changeDisLike: async function (postId) {
-            let data = await api("changeDisLiked", { postId: postId });
+            let data = await api("changeContentDisLiked", { postId: postId, type:"video" });
             console.log(data)
             if (data.value) {
                 let post = this.Posts.filter(post => post.id == postId)[0]
@@ -28,17 +27,14 @@
 })
 let lastPost = 0;
 async function load() {
-    let posts = await api("getPosts", { Offset: lastPost, Count: 20 });
+    let posts = await api("getContents", { Offset: lastPost, Count: 5, type:"video"  });
     lastPost += posts.length;
-    for (Post of posts) {
-        if (!vm.Users[Post.userId])
-            vm.Users[Post.userId] = JSON.parse(await api("getUser", { id: Post.userId })); 
-    }
-    vm.Posts = [...vm.Posts,...posts];
+    vm.Posts = posts;
 }
+/*
 $(window).scroll(async function(){
     if($(window).scrollTop()+$(window).height()>=$(document).height()){
         let count=await load();
     }
-})
+})*/
 load().then();

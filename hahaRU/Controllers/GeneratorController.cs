@@ -29,13 +29,14 @@ namespace hahaRU.Controllers
         public IActionResult Word()
         {
             wordGen a = new wordGen();
+            _manager.addFunnyWord(a.word);
             ViewBag.word = a.word;
             return View();
         }
         public IActionResult YT()
         {
             rngYouTube a = new rngYouTube();
-            ViewBag.word = _manager.url;
+            ViewBag.word = _manager.GetURL();
             return View();
         }
     }

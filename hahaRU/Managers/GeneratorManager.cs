@@ -1,4 +1,5 @@
 ﻿using hahaRU.Storage;
+using hahaRU.Storage.Entity;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -21,12 +22,21 @@ namespace hahaRU.Managers
         {
             Random rnd = new Random();
             string s;
-            _context.AnecdotTexts.Count();
+            int i1 = _context.AnecdotTexts.Count();
+            int i2 = _context.AnecdotEnds.Count();
             //_context.AnecdotTexts.ToList();
+            int rng1 = rnd.Next(1, i1+1);
+            int rng2 = rnd.Next(1, i2+1);
+            string s1 = _context.AnecdotTexts.Single(x => x.Id == rng1).Text;
+            string s2 = _context.AnecdotEnds.Single(x => x.Id == rng2).Text;
+            string s3 = s1 + " " + s2;
 
-            string[] A = { "Вегетарианцы не стареют. Они увядают.", "- Мама, а правда, что я получился нечаянно? - Сынок, буду откровенна - не очень-то ты и получился.- Мама, а правда, что я получился нечаянно? - Сынок, буду откровенна - не очень-то ты и получился.- Мама, а правда, что я получился нечаянно? - Сынок, буду откровенна - не очень-то ты и получился.- Мама, а правда, что я получился нечаянно? - Сынок, буду откровенна - не очень-то ты и получился.- Мама, а правда, что я получился нечаянно? - Сынок, буду откровенна - не очень-то ты и получился.- Мама, а правда, что я получился нечаянно? - Сынок, буду откровенна - не очень-то ты и получился.- Мама, а правда, что я получился нечаянно? - Сынок, буду откровенна - не очень-то ты и получился.- Мама, а правда, что я получился нечаянно? - Сынок, буду откровенна - не очень-то ты и получился.- Мама, а правда, что я получился нечаянно? - Сынок, буду откровенна - не очень-то ты и получился.- Мама, а правда, что я получился нечаянно? - Сынок, буду откровенна - не очень-то ты и получился.- Мама, а правда, что я получился нечаянно? - Сынок, буду откровенна - не очень-то ты и получился.- Мама, а правда, что я получился нечаянно? - Сынок, буду откровенна - не очень-то ты и получился.- Мама, а правда, что я получился нечаянно? - Сынок, буду откровенна - не очень-то ты и получился.- Мама, а правда, что я получился нечаянно? - Сынок, буду откровенна - не очень-то ты и получился.- Мама, а правда, что я получился нечаянно? - Сынок, буду откровенна - не очень-то ты и получился.- Мама, а правда, что я получился нечаянно? - Сынок, буду откровенна - не очень-то ты и получился.- Мама, а правда, что я получился нечаянно? - Сынок, буду откровенна - не очень-то ты и получился.", "Ищете женщину? Лучше ищите деньги! Женщина сама вас найдет.", "От импотенции еще ни кто не умирал, правда ни кто и не рождался.", "Заходит как-то в бар глухонемой и говорит: . . . . . ." };
-            s = A[rnd.Next(0, 5)];
-            return s;
+            //string[] A = { "Вегетарианцы не стареют. Они увядают.", "- Мама, а правда, что я получился нечаянно? - Сынок, буду откровенна - не очень-то ты и получился.- Мама, а правда, что я получился нечаянно? - Сынок, буду откровенна - не очень-то ты и получился.- Мама, а правда, что я получился нечаянно? - Сынок, буду откровенна - не очень-то ты и получился.- Мама, а правда, что я получился нечаянно? - Сынок, буду откровенна - не очень-то ты и получился.- Мама, а правда, что я получился нечаянно? - Сынок, буду откровенна - не очень-то ты и получился.- Мама, а правда, что я получился нечаянно? - Сынок, буду откровенна - не очень-то ты и получился.- Мама, а правда, что я получился нечаянно? - Сынок, буду откровенна - не очень-то ты и получился.- Мама, а правда, что я получился нечаянно? - Сынок, буду откровенна - не очень-то ты и получился.- Мама, а правда, что я получился нечаянно? - Сынок, буду откровенна - не очень-то ты и получился.- Мама, а правда, что я получился нечаянно? - Сынок, буду откровенна - не очень-то ты и получился.- Мама, а правда, что я получился нечаянно? - Сынок, буду откровенна - не очень-то ты и получился.- Мама, а правда, что я получился нечаянно? - Сынок, буду откровенна - не очень-то ты и получился.- Мама, а правда, что я получился нечаянно? - Сынок, буду откровенна - не очень-то ты и получился.- Мама, а правда, что я получился нечаянно? - Сынок, буду откровенна - не очень-то ты и получился.- Мама, а правда, что я получился нечаянно? - Сынок, буду откровенна - не очень-то ты и получился.- Мама, а правда, что я получился нечаянно? - Сынок, буду откровенна - не очень-то ты и получился.- Мама, а правда, что я получился нечаянно? - Сынок, буду откровенна - не очень-то ты и получился.", "Ищете женщину? Лучше ищите деньги! Женщина сама вас найдет.", "От импотенции еще ни кто не умирал, правда ни кто и не рождался.", "Заходит как-то в бар глухонемой и говорит: . . . . . ." };
+            //s = A[rnd.Next(0, 5)];
+            Anecdot anecdot= new Anecdot() { Text=s3 };
+            _context.Anecdots.Add(anecdot);
+            _context.SaveChanges();
+            return s3;
         }
         private static Random random = new Random();
         public string url;
@@ -37,14 +47,24 @@ namespace hahaRU.Managers
             return new string(Enumerable.Repeat(chars, length)
               .Select(s => s[random.Next(s.Length)]).ToArray());
         }
-        public string GetURL()
+        public string GetURL1()
         {
+            //if (_context.VideoSrcs.Count()!=0) //удаление потом допишем
+            //{
+            //    string url = _context.VideoSrcs.Single(x => x.Id == 1).Src;
+            //    var urltoDelete = _context.VideoSrcs.Single(x => x.Id == 1);
+            //    _context.VideoSrcs.Remove(urltoDelete);
+            //    _context.SaveChanges();
+
+            //    return url;
+            //}
+
             try
             {
-                var count = 1; //50 max
+                var count = 100; //100 max
                 var API_KEY = "AIzaSyBVJ5iH6EhlQ7g_3XQlO4US_ytkbam1kOU";
                 var q = RandomString(4);
-                // var url = "https://www.googleapis.com/youtube/v3/search?key=" + API_KEY + "&maxResults=" + count + "&part=snippet&type=video&q=" + q;
+                var url = "https://www.googleapis.com/youtube/v3/search?key=" + API_KEY + "&maxResults=" + count + "&part=snippet&type=video&q=" + q;
 
                 using (WebClient wc = new WebClient())
                 {
@@ -52,19 +72,50 @@ namespace hahaRU.Managers
                     dynamic jsonObject = JsonConvert.DeserializeObject(json);
                     foreach (var line in jsonObject["items"])
                     {
-                        return line["id"]["videoId"];
-                        //Console.WriteLine(line["id"]["videoId"]);
-                        /*store your id*/
+                        Config conf=_context.Configs.Single(config => config.key == "videoCount");
+                        if (conf == null)
+                        {
+                            conf = new Config() { key = "videosCount", Value = 0 };
+                            _context.Configs.Add(conf);
+                            _context.SaveChanges();
+                            conf = _context.Configs.Single(config => config.key == "videoCount");
+                        }
+                        conf.Value += 1;
+                        _context.SaveChanges();
+                        var newurl = new VideoSrc() { Src = line["id"]["videoId"] };
+                        _context.Add(newurl);
+                        _context.SaveChanges();
+                        //return line["id"]["videoId"];
                     }
-                    q = "LP5k6pO37kw";
+                    Random rnd = new Random();
+                    int i = _context.VideoSrcs.Count();
+                    int rng = rnd.Next(1, i + 1);
+                    q = _context.VideoSrcs.Single(x => x.Id == rng).Src;
                     return q;
                 }
             }
             catch
             {
-                var q = "LP5k6pO37kw";
+                Random rnd = new Random();
+                int i = _context.VideoSrcs.Count();
+                int rng = rnd.Next(1, i + 1);
+                string q = _context.VideoSrcs.Single(x => x.Id == rng).Src;
                 return q;
             }
+        }
+        public string GetURL()
+        {
+            string url = GetURL1();
+            Video video = new Video() { VideoSrc=url};
+            _context.Videos.Add(video);
+            _context.SaveChanges();
+            return url;
+        }
+        public void addFunnyWord(string word)
+        {
+            FunnyWord Word = new FunnyWord() { Text = word };
+            _context.FunnyWords.Add(Word);
+            _context.SaveChanges();
         }
     }
 }

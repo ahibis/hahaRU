@@ -3,7 +3,7 @@
     <div class="intro">Топ анекдотов за всё время</div>
     <div class="block between" v-for="post in Posts">
         <div>
-            <a href="/User">
+            <a :href="`/User/${post.userId}`">
                 <img :src="Users[post.userId].AvatarSrc" class="ava">
             </a>
         </div>

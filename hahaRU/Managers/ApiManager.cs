@@ -2,11 +2,13 @@
 using hahaRU.Models;
 using hahaRU.Storage;
 using hahaRU.Storage.Entity;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -265,7 +267,7 @@ namespace hahaRU.Managers
             int count = _context.memPictures.Count();
             if (count == 0) return new JsonStatus() { status = "error", text = "нет изображений" };
             Random rnd = new Random();
-            int id = rnd.Next(1, count);
+            int id = rnd.Next(1, count+1);
             memPictures mem = _context.memPictures.Where(mem => mem.Id == id).First();
             return new JsonStatus() { status = "ok", value = mem };
         }
@@ -275,7 +277,7 @@ namespace hahaRU.Managers
             int count = _context.memTexts.Count();
             if (count == 0) return new JsonStatus() { status = "error", text = "нет текстов" };
             Random rnd = new Random();
-            int id = rnd.Next(1, count);
+            int id = rnd.Next(1, count+1);
             memText mem = _context.memTexts.Where(mem => mem.Id == id).First();
             return new JsonStatus() { status = "ok", value=mem };
         }
@@ -312,6 +314,71 @@ namespace hahaRU.Managers
         {
             throw new NotImplementedException();
         }
+        public object saveAva(IFormFileCollection files, string webRootPath, HttpContext httpContext)
+        {
+            int? id = httpContext.Session.GetInt32("id");
+            if (id == null) return new JsonStatus() { status = "error", text = "Вы не авторизовались" };
+            string path = "";
+            if(files.Count==0) return new JsonStatus() { status = "error", text = "Картинка не найдена" };
+            var file = files[0];
+            path = "/img/avaImgs/" + file.FileName;
+                using (var fileStream = new FileStream(webRootPath + path, FileMode.Create))
+                {
+                    file.CopyTo(fileStream);
+                }
+                memPictures pic = new memPictures() { ImgSrc = file.FileName };
+            User user = _context.Users.Single(user => user.Id == (int)id);
+            if(user==null) return new JsonStatus() { status = "error", text = "Вы не авторизовались 2" };
+            user.AvatarSrc = path;
+            _context.SaveChanges();
+            return new JsonStatus() { status = "ok", value = path };
+        }
+
+        public object saveMem(IFormFileCollection files, string webRootPath)
+        {
+            foreach (var file in files)
+            {
+                string path = "/img/memGenerated/" + file.FileName;
+                using (var fileStream = new FileStream(webRootPath + path, FileMode.Create))
+                {
+                    file.CopyTo(fileStream);
+                }
+                Mem mem = new Mem() { ImgSrc = path };
+                _context.Mems.Add(mem);
+            }
+            _context.SaveChanges();
+            return new object();
+        }
+
+        public object saveMem(string imgBase64, string webRootPath)
+        {
+            int count = _context.Mems.Count();
+            string path = $"/img/memGenerated/img{count}.png";
+            File.WriteAllBytes(webRootPath + path, Convert.FromBase64String(imgBase64));
+            Mem mem = new Mem() { ImgSrc = path };
+            _context.Mems.Add(mem);
+            _context.SaveChanges();
+            return new JsonStatus() { status = "ok",value=mem };
+        }
+
+        public object saveMemPic(IFormFileCollection files, string webRootPath)
+        {
+            string path="";
+            foreach (var file in files)
+            {
+                path = "/img/memImgs/" + file.FileName;
+                using (var fileStream = new FileStream(webRootPath + path, FileMode.Create))
+                {
+                    file.CopyTo(fileStream);
+                }
+                memPictures pic = new memPictures() { ImgSrc = file.FileName };
+                _context.memPictures.Add(pic);
+                _context.SaveChanges();
+            }
+           return new JsonStatus() { status = "ok", value = path };
+        }
+            
+        
 
         public object sendPost(Post post, HttpContext httpContext)
         {
@@ -350,6 +417,7 @@ namespace hahaRU.Managers
             _context.SaveChanges();
             return "ok";
         }
+
         
     }
 }

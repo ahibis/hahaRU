@@ -9,6 +9,6 @@ namespace hahaRU.Managers
     {
         public string anecdotGen();
         public string GetURL();
-        public string url;
+        void addFunnyWord(string word);
     }
 }

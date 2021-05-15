@@ -25,5 +25,9 @@ namespace hahaRU.Managers
         object getContents(getPostReq data, HttpContext httpContext);
         object changeContentLiked(int postId, string type, HttpContext httpContext);
         object changeContentDisLiked(int postId, object type, HttpContext httpContext);
+        object saveMemPic(IFormFileCollection files, string webRootPath);
+        object saveMem(IFormFileCollection files, string webRootPath);
+        object saveAva(IFormFileCollection files, string webRootPath, HttpContext httpContext);
+        object saveMem(string imgBase64, string webRootPath);
     }
 }

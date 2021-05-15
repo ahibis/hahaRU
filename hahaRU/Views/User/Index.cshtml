@@ -5,7 +5,7 @@
 </script>
 <div id="app">
     <div class="between Data">
-        <img :src="AvatarSrc" class="avaMain">
+        <img :src="AvatarSrc" class="avaMain" v-on:click="avaChange">
         <div class="wrap" id="info">
             <div class="name">{{Login}}</div>
             <input class="date" type="date" v-model="Date" name="Date">

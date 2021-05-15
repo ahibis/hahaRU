@@ -53,6 +53,19 @@ namespace hahaRU.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Configs",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Value = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Configs", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "FunnyWords",
                 columns: table => new
                 {
@@ -218,6 +231,9 @@ namespace hahaRU.Migrations
 
             migrationBuilder.DropTable(
                 name: "AnecdotTexts");
+
+            migrationBuilder.DropTable(
+                name: "Configs");
 
             migrationBuilder.DropTable(
                 name: "FunnyWords");
