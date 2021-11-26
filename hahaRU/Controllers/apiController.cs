@@ -35,6 +35,7 @@ namespace hahaRU.Controllers
             return _manager.getUser(HttpContext);
         }
         [HttpPost]
+        
         public string updateUser(User user)
         {
             return _manager.updateUser(user, HttpContext);
